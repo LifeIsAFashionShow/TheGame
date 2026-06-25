@@ -30,9 +30,19 @@
   </head>
   <body>
     <canvas id="unity-canvas" tabindex="-1"></canvas>
-    <script src="Build/ProyectoWeb_Build.loader.js"></script>
+<script src="Build/ProyectoWeb_Build.loader.js"></script>
     <script>
-      createUnityInstance(document.querySelector("#unity-canvas"), {
+      var canvas = document.querySelector("#unity-canvas");
+      
+      // Forzamos el estilo ANTES de que Unity arranque
+      canvas.style.width = "100vw";
+      canvas.style.height = "56.25vw";
+      canvas.style.maxHeight = "100vh";
+      canvas.style.maxWidth = "177.78vh";
+      canvas.style.objectFit = "contain";
+      canvas.style.display = "block";
+
+      createUnityInstance(canvas, {
         arguments: [],
         dataUrl: "Build/ProyectoWeb_Build.data",
         frameworkUrl: "Build/ProyectoWeb_Build.framework.js",
@@ -42,6 +52,7 @@
         productName: "Life Is A Fashion Show",
         productVersion: "1.0",
       }).then((unityInstance) => {
+        // Opcional: ajustar el tamaño si la ventana cambia
       }).catch((message) => {
         alert(message);
       });
